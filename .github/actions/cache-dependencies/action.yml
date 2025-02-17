@@ -22,7 +22,11 @@ runs:
     - name: Install dependencies
       id: install
       if: ${{ steps.cache.outputs.cache-hit != 'true' || inputs.caching != 'true' }}
-      run: |
-        npm ci
-        echo "cache='${{ inputs.caching }}'" >> $GITHUB_OUTPUT
+      run: npm ci
+      shell: bash
+    - name: Set Output
+      run: echo "cache='${{ inputs.caching }}'" >> $GITHUB_OUTPUT
+      shell: bash
+    - name: Print Output
+      run: echo "${{ (steps.cache.outputs.cache-hit != 'true' || inputs.caching != 'true') ? 'Cache was not used.' : 'Cache was used.' }}"
       shell: bash
