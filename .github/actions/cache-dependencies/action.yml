@@ -11,8 +11,6 @@ outputs:
     value: ${{ steps.install.outputs.cache }}
 runs:
   using: "composite"
-  env:
-    CACHE_STATUS: "true"
   steps:
     - name: Cache dependencies
       if: ${{ inputs.caching == 'true' }}
@@ -26,11 +24,5 @@ runs:
       if: ${{ steps.cache.outputs.cache-hit != 'true' || inputs.caching != 'true' }}
       run: |
         npm ci
-        echo "$CACHE_STATUS='false'"
-      shell: bash
-    - name: Set Output
-      run: echo "cache='${{ inputs.caching }}'" >> $GITHUB_OUTPUT
-      shell: bash
-    - name: Print Output
-      run: echo "$CACHE_STATUS"
+        echo "cache='${{ inputs.caching }}'" >> $GITHUB_OUTPUT
       shell: bash
