@@ -26,3 +26,6 @@ runs:
         npm ci
         echo "cache='${{ inputs.caching }}'" >> $GITHUB_OUTPUT
       shell: bash
+    - name: Print Output
+      run: echo "${{ steps.install.outputs.cache && 'Cache was not used.' || 'Cache was used.' }}"
+      shell: bash
