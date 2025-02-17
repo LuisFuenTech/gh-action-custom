@@ -10,9 +10,12 @@ jobs:
       - name: Get code
         uses: actions/checkout@v4
       - name: Load & Cache dependencies
+        id: cache-dependencies
         uses: ./.github/actions/cache-dependencies
         with:
           caching: false
+      - name: Output Information
+        run: echo "Cache used? ${{ steps.cache-dependencies.outputs.used-cache }}"
       - name: Lint code
         run: npm run lint
   test:
@@ -21,7 +24,10 @@ jobs:
       - name: Get code
         uses: actions/checkout@v4
       - name: Load & Cache dependencies
+        id: cache-dependencies
         uses: ./.github/actions/cache-dependencies
+      - name: Output Information
+        run: echo "Cache used? ${{ steps.cache-dependencies.outputs.used-cache }}"
       - name: Test code
         id: run-tests
         run: npm run test
