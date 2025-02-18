@@ -12,9 +12,6 @@ jobs:
       - name: Load & Cache dependencies
         id: cache-dependencies
         uses: LuisFuenTech/gha-cache-deps@v1.1.2
-        with:
-          node-manager: yarn
-          lock-file: yarn.lock
       - name: Output Information
         run: echo "Cache used? ${{ steps.cache-dependencies.outputs.used-cache }}"
       - name: Lint code
