@@ -46,6 +46,7 @@ jobs:
       - name: Load & Cache dependencies
         uses: ./.github/actions/cache-dependencies
         with:
+          caching: false
           node-manager: yarn
           lock-file: yarn.lock
       - name: Build website
