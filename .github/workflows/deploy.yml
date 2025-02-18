@@ -13,7 +13,7 @@ jobs:
         id: cache-dependencies
         uses: LuisFuenTech/gha-cache-deps@v1.1.2
       - name: Output Information
-        run: echo "Cache used? ${{ steps.cache-dependencies.outputs.used-cache }}"
+        run: echo "Cache used? ${{ toJson(steps.cache-dependencies.outputs) }}"
       - name: Lint code
         run: npm run lint
   test:
@@ -25,7 +25,7 @@ jobs:
         id: cache-dependencies
         uses: LuisFuenTech/gha-cache-deps@v1.1.2
       - name: Output Information
-        run: echo "Cache used? ${{ steps.cache-dependencies.outputs.used-cache }}"
+        run: echo "Cache used? ${{ toJson(steps.cache-dependencies.outputs) }}"
       - name: Test code
         id: run-tests
         run: npm run test
@@ -42,11 +42,14 @@ jobs:
       - name: Get code
         uses: actions/checkout@v4
       - name: Load & Cache dependencies
+        id: cache-deps
         uses: LuisFuenTech/gha-cache-deps@v1.1.2
         with:
           caching: false
           node-manager: yarn
           lock-file: yarn.lock
+      - name: Output Information
+        run: echo "Cache used? ${{ toJson(steps.cache-deps.outputs) }}"
       - name: Build website
         run: npm run build
       - name: Upload artifacts
