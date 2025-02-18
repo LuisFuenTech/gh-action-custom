@@ -11,9 +11,10 @@ jobs:
         uses: actions/checkout@v4
       - name: Load & Cache dependencies
         id: cache-dependencies
-        uses: LuisFuenTech/gha-cache-deps@v1.1.1
+        uses: LuisFuenTech/gha-cache-deps@v1.1.2
         with:
-          caching: false
+          node-manager: yarn
+          lock-file: yarn.lock
       - name: Output Information
         run: echo "Cache used? ${{ steps.cache-dependencies.outputs.used-cache }}"
       - name: Lint code
@@ -25,7 +26,7 @@ jobs:
         uses: actions/checkout@v4
       - name: Load & Cache dependencies
         id: cache-dependencies
-        uses: LuisFuenTech/gha-cache-deps@v1.1.1
+        uses: LuisFuenTech/gha-cache-deps@v1.1.2
       - name: Output Information
         run: echo "Cache used? ${{ steps.cache-dependencies.outputs.used-cache }}"
       - name: Test code
@@ -44,7 +45,7 @@ jobs:
       - name: Get code
         uses: actions/checkout@v4
       - name: Load & Cache dependencies
-        uses: LuisFuenTech/gha-cache-deps@v1.1.1
+        uses: LuisFuenTech/gha-cache-deps@v1.1.2
         with:
           caching: false
           node-manager: yarn
