@@ -26,6 +26,7 @@ runs:
   steps:
     - name: Checkout code
       run: echo files-asdas-d ${{ hashFiles('**/${{ inputs.lock-file }}') }}
+      shell: bash
     - name: Cache dependencies
       if: ${{ inputs.caching == 'true' }}
       id: cache
