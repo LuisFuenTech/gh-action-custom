@@ -4,6 +4,7 @@ import logo from "./assets/images/logo.png";
 import axios from "axios";
 import moment from "moment";
 import cors from "cors";
+import ioredis from "ioredis";
 console.log("App.js", moment(), "axios");
 console.log("Dummy message");
 
