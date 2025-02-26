@@ -5,6 +5,7 @@ import axios from "axios";
 import moment from "moment";
 import cors from "cors";
 console.log("App.js", moment(), "axios");
+console.log("Dummy message");
 
 function App() {
   axios.get("https://api.github.com/users/octocat").then((response) => {
