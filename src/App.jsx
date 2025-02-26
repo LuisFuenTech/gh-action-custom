@@ -1,7 +1,13 @@
-import MainContent from './components/MainContent';
-import logo from './assets/images/logo.png';
+import MainContent from "./components/MainContent";
+import logo from "./assets/images/logo.png";
+
+import axios from "axios";
 
 function App() {
+  axios.get("https://api.github.com/users/octocat").then((response) => {
+    console.log(response.data);
+  });
+
   return (
     <>
       <header>
