@@ -27,6 +27,9 @@ jobs:
       - name: Load & Cache dependencies
         id: cache-dependencies
         uses: LuisFuenTech/gha-cache-deps@v1.2.0
+        with:
+          node-manager: yarn
+          lock-file: yarn.lock
       - name: Output Information
         run: echo "Cache used? ${{ toJson(steps.cache-dependencies.outputs) }}"
       - name: Test code
@@ -47,6 +50,9 @@ jobs:
       - name: Load & Cache dependencies
         id: cache-deps
         uses: LuisFuenTech/gha-cache-deps@v1.2.0
+        with:
+          node-manager: yarn
+          lock-file: yarn.lock
       - name: Output Information
         run: echo "Cache used? ${{ toJson(steps.cache-deps.outputs) }}"
       - name: Build website
