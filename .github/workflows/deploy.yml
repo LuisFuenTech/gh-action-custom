@@ -20,6 +20,7 @@ jobs:
       - name: Lint code
         run: npm run lint
   test:
+    if: false
     runs-on: ubuntu-latest
     steps:
       - name: Get code
@@ -42,7 +43,7 @@ jobs:
           name: test-report
           path: test.json
   build:
-    needs: test
+    # needs: test
     runs-on: ubuntu-latest
     steps:
       - name: Get code

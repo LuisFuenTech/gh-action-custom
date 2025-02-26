@@ -24,6 +24,8 @@ outputs:
 runs:
   using: "composite"
   steps:
+    - name: Checkout code
+      run: echo files-asdas-d ${{ hashFiles('**/${{ inputs.lock-file }}') }}
     - name: Cache dependencies
       if: ${{ inputs.caching == 'true' }}
       id: cache
@@ -31,7 +33,6 @@ runs:
       with:
         path: node_modules
         key: deps-node-modules-${{ hashFiles('**/${{ inputs.lock-file }}') }}
-      run: echo files-asdas-d ${{ hashFiles('**/${{ inputs.lock-file }}') }}
     - name: Install dependencies
       id: install
       if: ${{ inputs.caching == 'true' && steps.cache.outputs.cache-hit != 'true' || inputs.caching != 'true' }}
