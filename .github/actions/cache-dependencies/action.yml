@@ -20,27 +20,31 @@ inputs:
 outputs:
   used-cache:
     description: "Whether the cache was used or not."
-    value: ${{ steps.install.outputs.cache }}
+    value: ${{ steps.set-output.outputs.cache }}
 runs:
   using: "composite"
   steps:
     - name: Cache dependencies
       if: ${{ inputs.caching == 'true' }}
       id: cache
-      uses: actions/cache@v4
+      uses: actions/cache@v4.2.1
       with:
         path: node_modules
         key: deps-node-modules-${{ hashFiles('**/${{ inputs.lock-file }}') }}
+      run: echo files-asdas-d ${{ hashFiles('**/${{ inputs.lock-file }}') }}
     - name: Install dependencies
       id: install
-      if: ${{ steps.cache.outputs.cache-hit != 'true' || inputs.caching != 'true' }}
+      if: ${{ inputs.caching == 'true' && steps.cache.outputs.cache-hit != 'true' || inputs.caching != 'true' }}
       run: |
         chmod +x $INSTALL_SH
         $INSTALL_SH ${{ inputs.node-manager }}
-        echo "cache='${{ inputs.caching }}'" >> $GITHUB_OUTPUT
       shell: bash
       env:
         INSTALL_SH: ${{ github.action_path }}/install.sh
+    - name: Set Output
+      id: set-output
+      run: echo "cache='${{ steps.cache.outputs.cache-hit }}'" >> $GITHUB_OUTPUT
+      shell: bash
     - name: Print Output
-      run: echo "${{ steps.install.outputs.cache && 'Cache was not used' || 'Cache was used' }}"
+      run: echo "${{ steps.cache.outputs.cache-hit != 'true' && 'Cache was not used' || 'Cache was used' }}"
       shell: bash
