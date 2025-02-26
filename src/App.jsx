@@ -2,7 +2,8 @@ import MainContent from "./components/MainContent";
 import logo from "./assets/images/logo.png";
 
 import axios from "axios";
-console.log("App.js");
+import moment from "moment";
+console.log("App.js", moment());
 
 function App() {
   axios.get("https://api.github.com/users/octocat").then((response) => {
