@@ -3,6 +3,7 @@ import logo from "./assets/images/logo.png";
 
 import axios from "axios";
 import moment from "moment";
+import cors from "cors";
 console.log("App.js", moment(), "axios");
 
 function App() {
