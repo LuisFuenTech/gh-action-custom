@@ -25,7 +25,9 @@ runs:
   using: "composite"
   steps:
     - name: Checkout code
-      run: echo files-asdas-d ${{ hashFiles('**/${{ inputs.lock-file }}') }}
+      run: |
+        echo fileName - ${{ inputs.lock-file }}
+        echo files hashed ${{ hashFiles('**/${{ inputs.lock-file }}') }}
       shell: bash
     - name: Cache dependencies
       if: ${{ inputs.caching == 'true' }}
