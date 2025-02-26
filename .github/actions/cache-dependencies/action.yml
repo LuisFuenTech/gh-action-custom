@@ -27,7 +27,7 @@ runs:
     - name: Checkout code
       run: |
         echo fileName - ${{ inputs.lock-file }}
-        echo files hashed ${{ hashFiles('**/${{ inputs.lock-file }}') }}
+        echo files hashed ${{ hashFiles('**/' + inputs.lock-file) }}
       shell: bash
     - name: Cache dependencies
       if: ${{ inputs.caching == 'true' }}
@@ -35,7 +35,7 @@ runs:
       uses: actions/cache@v4.2.1
       with:
         path: node_modules
-        key: deps-node-modules-${{ hashFiles('**/${{ inputs.lock-file }}') }}
+        key: deps-node-modules-${{ hashFiles('**/' + inputs.lock-file) }}
     - name: Install dependencies
       id: install
       if: ${{ inputs.caching == 'true' && steps.cache.outputs.cache-hit != 'true' || inputs.caching != 'true' }}
